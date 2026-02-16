@@ -1,0 +1,39 @@
+# Commands:- 
+# apply :- kubectl apply -f nginx-deployment.yaml
+# get pod:- kubectl get pod
+# api version with deployment:- kubectl api-resources | grep deployment
+# delete pods :- kubectl delete <name> <pod-name>
+# delete all service, pod etc :- kubectl delete all --all
+# get all pods label :- kubectl get po --show-labels
+# History rollout :- kubectl rollout history deployment/nginx-deployment
+# Rollback :- kubectl rollout undo deployment/my-app --to-revision=1
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-deployment
+  annotations:
+    kubernetes.io/change-cause: "Updating to Alphin version" # this is use to give reason of changes
+spec:
+  replicas: 3 # you will set your no. of replicas
+  revisionHistoryLimit: 5 # By default 10 history to check histort for roll back
+  selector:
+    matchLabels:
+      app: nginx # this is very important and must be same as label name of app so it 
+  
+  template:
+    metadata:
+      name : nginx-pod
+      labels: 
+        app: nginx
+    
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.21.3
+          ports:
+            - containerPort: 8082
+  
+
+
