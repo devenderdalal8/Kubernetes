@@ -1,0 +1,43 @@
+# Commands:- 
+# apply :- kubectl apply -f nginx-services.yaml
+# get pod:- kubectl get pod
+# api version with deployment:- kubectl api-resources | grep services
+#  get all services :- kubectl get services 
+# access with service name or ip address :- curl nginx-service:8082
+# port forwarding :- kubectl port-forward service/nginx-service 8083:8082
+# get endpoints :- kubectl get endpoints
+
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx-service
+  annotations:
+    kubernetes.io/change-cause: "Updating to Alphin version" # this is use to give reason of changes
+spec:
+  selector:
+    app: nginx # must match with pod label to find correct pod
+
+  # type: ClusterIP 
+  # default service :- It can't be access outside the cluster but it can be access from inside cluster
+  # ports:
+  #   - name: api # name must be unique to access port number 
+  #     port: 8082 #service will accept the request ( Service Port)
+  #     targetPort: 80 # container port
+  #   - name: metric
+  #     port: 90
+  #     targetPort: 90
+
+  # NodePort service example 
+  # type: NodePort
+  # ports:
+  #   - port: 8082
+  #     targetPort: 80
+  #     nodePort: 30001 # range only 30000 - 32767
+
+  # LoadBalancer
+  type: LoadBalancer
+  ports:
+    - port: 8082
+      targetPort: 80
+      nodePort: 30001 # range only 30000 - 32767
