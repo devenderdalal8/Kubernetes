@@ -1,0 +1,28 @@
+# Add Ingress Controller :- minikube addon enable ingress -p ingress-cluster (cluster name)
+# verify :- kubectl get po -n ingress-nginx
+# All details :- Kubectl get svc -n ingress-nginx
+# Apply : kubectl apply -f nginx-ingress.yaml
+# describe:- kubectl describe ingress ingress-nginx
+# minikube Ip address check :- minkube ip -p ingress-cluster
+# Map minikub ip address with ingress IP address
+  # sudo nano /etc/hosts
+  # add this line : minikube IP   domain name
+  # e.g : 192.168.67.2  nginx-demo.com
+  # now this is hosted by nginx-demo.com
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  rules:
+    - host: nginx-demo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix # PathType :- Prefix , Excet , ImplementationSpecific
+            backend:
+              service:
+                name: nginx-service # it must be same name as services
+                port:
+                  number: 8082 # Same service port number which we have to forward our request

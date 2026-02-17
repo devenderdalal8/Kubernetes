@@ -18,15 +18,12 @@ spec:
   selector:
     app: nginx # must match with pod label to find correct pod
 
-  # type: ClusterIP 
+  type: ClusterIP 
   # default service :- It can't be access outside the cluster but it can be access from inside cluster
-  # ports:
-  #   - name: api # name must be unique to access port number 
-  #     port: 8082 #service will accept the request ( Service Port)
-  #     targetPort: 80 # container port
-  #   - name: metric
-  #     port: 90
-  #     targetPort: 90
+  ports:
+    - name: api # name must be unique to access port number 
+      port: 8082 #service will accept the request ( Service Port)
+      targetPort: 80 # container port
 
   # NodePort service example 
   # type: NodePort
@@ -35,9 +32,9 @@ spec:
   #     targetPort: 80
   #     nodePort: 30001 # range only 30000 - 32767
 
-  # LoadBalancer
-  type: LoadBalancer
-  ports:
-    - port: 8082
-      targetPort: 80
-      nodePort: 30001 # range only 30000 - 32767
+  # # LoadBalancer
+  # type: LoadBalancer
+  # ports:
+  #   - port: 8082
+  #     targetPort: 80
+  #     nodePort: 30001 # range only 30000 - 32767
