@@ -13,6 +13,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: nginx-deployment
+  namespace: nginx  # should be same as what did you used in namespace file
   annotations:
     kubernetes.io/change-cause: "Updating to Alphin version" # this is use to give reason of changes
 spec:
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
         - name: nginx-container
-          image: nginx:1.21.3
+          image: nginx:latest
           ports:
             - containerPort: 8082
   

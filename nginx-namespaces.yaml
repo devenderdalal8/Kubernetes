@@ -1,0 +1,18 @@
+# Commands
+# create Namespace :- kubectl create namespace nginx
+# delete :- kubectl delete ns nginx
+# get resource :- kubectl api-resources | grep namespaves
+# get All Namespaces :- kubectl get namespaces
+# get all created namespaces:
+#     kubectl get all -A
+#     or 
+#     kubectl get all --all -namesapces
+# change current cluster with new namespaces
+# kubectl config set-context --current --namespace=nginx
+# Access curl : <Path>.<Namespace>:<Port>
+# e.g : todo-api-service:nginx:8080/api/todos
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
