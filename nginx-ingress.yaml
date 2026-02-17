@@ -10,6 +10,9 @@
   # e.g : 192.168.67.2  nginx-demo.com
   # now this is hosted by nginx-demo.com
 
+# set Path :  
+  # pathType: Prefix # PathType :- Prefix , Excet , ImplementationSpecific
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
